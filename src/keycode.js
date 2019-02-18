@@ -1,47 +1,3 @@
- <!DOCTYPE html>
-    <html>
-    <head>
-  <style>
-      #keys {
-          position: absolute;
-          left:10px;
-          top:10px;
-          height: 5px;
-          width:5px;
-          border:1px solid #ff0000;
-     }        
-      
-      #target {
-          position: absolute;
-          left:500px;
-          top:0px;
-          height: 50px;
-          width:50px;
-          border:1px solid #0000ff;
-                  
-      }        
-        
-  
-        
-</style>
-
-
-
-    </head>
-    <body onkeyup="showKey(event);"  onload="moveTarget(event)
-    ">
-
-
-
-        <div id="keys">
-        
-        </div>
-<div id="target">
-        
-        </div>
-        
-    <script>
-//alert(navigator.appVersion);
 
         var rightpos = 10;
         var toppos = 10
@@ -57,18 +13,9 @@
         movement = 50;
       }
      document.getElementById("target").style.top = currHeight + 'px';
-   // setTimeout(moveTarget,200)
     }
-    
-    
-      
-        
-        
 function showKey(e){
-    //enter is 13
-    //down is 40
-    //left 37
-    //up is 38
+  
     if (e.keyCode == 39){
         rightpos += 15
         document.getElementById("keys").style.left = rightpos + 'px';
@@ -83,13 +30,7 @@ function showKey(e){
         rightpos -= 15
         document.getElementById("keys").style.left= rightpos + 'px';
      }
-    
-    
-     
-   // console.log( document.getElementById("keys").style.left );
-    //document.getElementById("keys").style.left += 15;
-    
-    
+   
 }
   document.addEventListener("click",function (event){
  
@@ -117,16 +58,7 @@ function showKey(e){
             clearInterval(myVar);
            }
 
-          /*   
-          document.getElementById("keys").style.left = xcoord + 'px';
-          document.getElementById("keys").style.top = ycoord + 'px';
-           */
+  
          }
 
-  })
-
-        
-    </script>    
-        
-        </body>
-    </html>
+ 
