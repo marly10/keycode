@@ -1,7 +1,6 @@
 ---
 
   tasks:
-  
   - name: creating localhost file
   - path: /home/ubuntu/hosts
     owner: ubuntu
@@ -13,4 +12,4 @@
       path: "/home/ubuntu/this_is_from_github.txt"
       state: touch
 
-  
+...

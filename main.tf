@@ -2,10 +2,36 @@ data "aws_security_group" "ssh" {
   id = "sg-0747026767ceec6b5"
 }
 
+# cloud-init config that installs the provisioning scripts
+data "local_file" "write_ssh_interval" {
+  filename = "cloud-data"
+}
+
+data "local_file" "write_apt_update" {
+  filename = "cloud-data-configuration"
+}
+
+
+data "cloudinit_config" "provision" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content_type = "text/cloud-config"
+    content      = data.local_file.write_ssh_interval.content
+  }
+
+  part {
+    content_type = "text/cloud-config"
+    content      = data.local_file.write_apt_update.content
+  }
+}
+
 resource "aws_instance" "ec2" {
   ami           = var.ami
   instance_type = var.instance_type
   key_name      = "aws_lajolla_public"
+  user_data = data.cloudinit_config.provision.rendered
   vpc_security_group_ids = [
     "sg-0747026767ceec6b5",
     "sg-06700b3cf3acc1772"
@@ -47,7 +73,7 @@ resource "aws_instance" "ec2" {
     host        = self.public_ip
     user        = "ubuntu"
     private_key = file("/Users/rickymarly/.ssh/aws_lajolla")
-    timeout     = "4m"
+    timeout = "30m"
   }
 
   provisioner "remote-exec" {
@@ -59,9 +85,10 @@ resource "aws_instance" "ec2" {
       #sudo apt install ansible
       "chmod +x /home/ubuntu/var.sh",
       "bash /home/ubuntu/var.sh",
-      "ansible-pull --accept-host-key -d /home/ubuntu/git --key-file=/home/ubuntu/aws_lajolla -C HEAD -U 'git@github.com:marly10/keycode.git'",
+      "ansible-pull --accept-host-key -d /home/ubuntu/git --key-file=/home/ubuntu/aws_lajolla -C HEAD -U 'git@github.com:marly10/keycode.git' -i hosts",
     ]
   }
+  //ansible-pull --accept-host-key -d /home/ubuntu/git --key-file=/home/ubuntu/aws_lajolla -C HEAD -U 'git@github.com:marly10/keycode.git' -i hosts
 
   //command used to install splunk:
   //sudo apt update 
