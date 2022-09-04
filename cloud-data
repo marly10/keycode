@@ -1,0 +1,6 @@
+#cloud-config
+write_files:
+  - content: |
+        ClientAliveInterval 120
+        ClientAliveCountMax 720
+    path: /home/ubuntu/.ssh/_does_woeks
