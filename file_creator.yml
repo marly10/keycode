@@ -15,7 +15,7 @@
     - name: Copying the file
       copy: 
         src:  /home/ubuntu/var.sh
-        dest:  /home/ubuntu/test/var.sh
+        dest: /home/ubuntu/test/var.sh
         
     - name: Coping another file
       copy: src= /home/ubuntu/provider.tf dest= /home/ubuntu/test mode=0644
