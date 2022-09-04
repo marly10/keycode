@@ -1,15 +1,28 @@
+#################
+# LEMP PLAYBOOK #
+#################
 ---
-
+- name: A Sample yml file to copy the file
+  hosts: localhost
   tasks:
-  - name: creating localhost file
-  - path: /home/ubuntu/hosts
-    owner: ubuntu
-    content: |
-      localhost ansible_connection=local
+    
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path:  /home/ubuntu/test
+        state: directory
+        mode: '0755'
 
-  - name: Ansible create file if it doesn't exist example
-    file:
-      path: "/home/ubuntu/this_is_from_github.txt"
-      state: touch
+    - name: Copying the file
+      copy: 
+        src:  /home/ubuntu/var.sh
+        dest:  /home/ubuntu/test/var.sh
+        
+    - name: Coping another file
+      copy: src= /home/ubuntu/provider.tf dest= /home/ubuntu/test mode=0644
+        
+    - name: Updating the file
+      copy:
+        content: 'Checking if content copy works'
+        dest:  /home/ubuntu/yes.yml
 
-...
+  
