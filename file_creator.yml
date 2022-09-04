@@ -6,23 +6,10 @@
   hosts: localhost
   tasks:
     
-    - name: Create a directory if it does not exist
-      ansible.builtin.file:
-        path:  /home/ubuntu/test
-        state: directory
-        mode: '0755'
+   - name: Create a directory if it does not exist
+     ansible.builtin.file:
+       path:  /home/ubuntu/test
+       state: directory
+       mode: '0755'
 
-    - name: Copying the file
-      copy: 
-        src:  /home/ubuntu/var.sh
-        dest: /home/ubuntu/test/var.sh
-        
-    - name: Coping another file
-      copy: src= /home/ubuntu/provider.tf dest= /home/ubuntu/test mode=0644
-        
-    - name: Updating the file
-      copy:
-        content: 'Checking if content copy works'
-        dest:  /home/ubuntu/yes.yml
-
-  
+   
