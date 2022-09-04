@@ -35,7 +35,7 @@ resource "aws_instance" "ec2" {
   ]
 
   tags = {
-    Name = "new-instance_lajolla"
+    Name = "new-instance_heat"
   }
 
   # Let's create and attach an ebs volume 
@@ -80,7 +80,7 @@ resource "aws_instance" "ec2" {
       #"sudo apt -y update",
       #"sudo apt install -y ansible",
       #"sudo apt install -y yamllint",
-      
+      "chmod 0400 /home/ubuntu/aws_lajolla_public.pem",
       "chmod +x /home/ubuntu/var.sh",
       "sudo bash /home/ubuntu/var.sh",
     ]
@@ -107,4 +107,9 @@ ClientAliveCountMax 720
 EOF
   */
 }
+
+
+# ansible-pull -C <branch name> -U https://github.com/<username>/<repo>.git <file_name>.yml 
+
+  //ansible-pull --accept-host-key -d /home/ubuntu/git --key-file=/home/ubuntu/aws_lajolla -C master -U 'git@github.com:marly10/keycode.git' -i hosts
 
