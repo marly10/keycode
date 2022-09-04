@@ -3,6 +3,8 @@
 - hosts: localhost
   tasks:
   - name: Ansible create file if it doesn't exist example
+    hosts: localhost
+    connection: local
     file:
       path: "/home/ubuntu/this_is_from_github.txt"
       state: touch
