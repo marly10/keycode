@@ -1,0 +1,20 @@
+name: YAML Linting
+
+on:
+  push:
+  pull_request:
+    branches:
+
+jobs:
+  lint:
+    name: Lint YAML Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Lint YAML files
+        run: |
+            find ../.. -type f -name "*.yml" -o -name "*.yaml" | while read filename; do
+              yamllint "$filename"
+              echo The files $filename
+            done
+
